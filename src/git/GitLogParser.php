@@ -35,6 +35,9 @@ class GitLogParser {
                 );
                 continue;
             }
+            if (false === strpos($line, ':')) {
+                continue;
+            }
             list($key, $value) = explode(':', $line, 2);
             $commitData[$key] = $value;
         }
