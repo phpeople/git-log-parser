@@ -17,10 +17,12 @@ class GitLogParser {
     const PRETTY_FORMAT_STRING = 'H:%H%naN:%aN%naE:%aE%nai:%ai%ncN:%cN%ncE:%cE%nci:%ci%ns:%s%nb:%b%n%n';
 
     /**
+     * @param Branch $branch
+     *
      * @return Commit[]
      */
-    public function getCommits() {
-        exec(sprintf('git log --pretty=format:"%s"', self::PRETTY_FORMAT_STRING), $output);
+    public function getCommits(Branch $branch) {
+        exec(sprintf('git log --pretty=format:"%s" %s', self::PRETTY_FORMAT_STRING, $branch->getName()), $output);
         $commits = [];
         $commitData = [];
         foreach ($output as $line) {
